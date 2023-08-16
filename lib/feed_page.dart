@@ -5,6 +5,10 @@ class FeedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(),
+      ),
+    );
   }
 }
