@@ -12,7 +12,8 @@ void main() async {
   runApp(DevicePreview(
     enabled: true,
     builder: (BuildContext context) {
-      return const MyApp();
+      // ignore: deprecated_member_use
+      return const MaterialApp(useInheritedMediaQuery: true, home: MyApp());
     },
   ));
 }
@@ -31,13 +32,8 @@ class _MyAppState extends State<MyApp> {
       home: Scaffold(
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              // Navigator.push(context,
-              //     MaterialPageRoute(builder: (context) => const FeedPage()));
-              showDialog(
-                  context: context,
-                  builder: (context) => const AlertDialog(
-                        content: Text("What's up"),
-                      ));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const FeedPage()));
             },
             child: const Icon(Icons.add),
           ),
@@ -45,14 +41,7 @@ class _MyAppState extends State<MyApp> {
           appBar: AppBar(
             backgroundColor: Colors.black,
             leading: GestureDetector(
-                onTap: () {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => const FeedPage()));
-                  debugPrint("asap rocky");
-                },
-                child: const Icon(Icons.person_outline)),
+                onTap: () {}, child: const Icon(Icons.person_outline)),
           ),
           body: const SingleChildScrollView(
             child: Column(

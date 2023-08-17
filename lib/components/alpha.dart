@@ -16,8 +16,10 @@ class _FeedPostState extends State<FeedPost> {
   String formattedTime = '';
   time() {
     Timer.periodic(const Duration(seconds: 1), (timer) {
-      var currentTime = DateTime.now();
+     setState(() {
+        var currentTime = DateTime.now();
       formattedTime = "${currentTime.hour}:${currentTime.minute}".toString();
+     });
     });
     return formattedTime;
   }
