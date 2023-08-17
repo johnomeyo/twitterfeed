@@ -31,8 +31,13 @@ class _MyAppState extends State<MyApp> {
       home: Scaffold(
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const FeedPage()));
+              // Navigator.push(context,
+              //     MaterialPageRoute(builder: (context) => const FeedPage()));
+              showDialog(
+                  context: context,
+                  builder: (context) => const AlertDialog(
+                        content: Text("What's up"),
+                      ));
             },
             child: const Icon(Icons.add),
           ),
@@ -49,11 +54,12 @@ class _MyAppState extends State<MyApp> {
                 },
                 child: const Icon(Icons.person_outline)),
           ),
-          body: const Column(
-            children: [
-              FeedPost(),
-              
-            ],
+          body: const SingleChildScrollView(
+            child: Column(
+              children: [
+                FeedPost(),
+              ],
+            ),
           )),
     );
   }
