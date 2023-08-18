@@ -1,4 +1,6 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class FeedPage extends StatefulWidget {
@@ -10,6 +12,30 @@ class FeedPage extends StatefulWidget {
 
 class _FeedPageState extends State<FeedPage> {
   final tweet = TextEditingController();
+  bool showPostButton = false;
+  @override
+  void initState() {
+    super.initState();
+    tweet.addListener(_updatePostButtonVisibility);
+  }
+
+  void _updatePostButtonVisibility() {
+    setState(() {
+      showPostButton = tweet.text.isNotEmpty;
+    });
+  }
+
+  void postTweet() async {
+    try {
+      await FirebaseFirestore.instance.collection('tweets').add({
+        "tweet": tweet.text,
+        "time": DateTime.now(),
+      });
+      debugPrint("Tweet posted succesfully ");
+    } catch (e) {
+      debugPrint("The error is $e");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +48,9 @@ class _FeedPageState extends State<FeedPage> {
           // ),
           body: Column(
             children: [
-              SizedBox(height: 30,),
+              const SizedBox(
+                height: 30,
+              ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Row(
@@ -36,19 +64,24 @@ class _FeedPageState extends State<FeedPage> {
                           Icons.arrow_back,
                           color: Colors.white,
                         )),
+                        TextButton(onPressed: postTweet, child: const Text("post",style: TextStyle(color: Colors.white),)),
                     Visibility(
-                      visible: tweet.text.isNotEmpty? true: false,
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(20)),
-                        child: const Padding(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                          child: Text(
-                            "Post",
-                            style: TextStyle(
-                                color: Colors.white, fontWeight: FontWeight.w900),
+                      visible: showPostButton,
+                      child: GestureDetector(
+                        onTap: () => postTweet,
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.blue,
+                              borderRadius: BorderRadius.circular(20)),
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 10),
+                            child: Text(
+                              "Post",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w900),
+                            ),
                           ),
                         ),
                       ),
@@ -79,8 +112,8 @@ class _FeedPageState extends State<FeedPage> {
                           border: Border.all(width: 1, color: Colors.blue),
                           borderRadius: BorderRadius.circular(20)),
                       child: const Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                         child: Text(
                           "Public",
                           style: TextStyle(color: Colors.blue),

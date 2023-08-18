@@ -14,15 +14,15 @@ class _FeedPostState extends State<FeedPost> {
   // String currentTime = '';
   String currentDate = "";
   String formattedTime = '';
-  time() {
-    Timer.periodic(const Duration(seconds: 1), (timer) {
-     setState(() {
-        var currentTime = DateTime.now();
-      formattedTime = "${currentTime.hour}:${currentTime.minute}".toString();
-     });
-    });
-    return formattedTime;
-  }
+  // time() {
+  //   Timer.periodic(const Duration(seconds: 1), (timer) {
+  //    setState(() {
+  //       var currentTime = DateTime.now();
+  //     formattedTime = "${currentTime.hour}:${currentTime.minute}".toString();
+  //    });
+  //   });
+  //   return formattedTime;
+  // }
 
   date() {
     var today = DateTime.now();
@@ -32,7 +32,7 @@ class _FeedPostState extends State<FeedPost> {
 
   @override
   Widget build(BuildContext context) {
-    var now = time();
+    // var now = time();
     var postDate = date();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -105,11 +105,11 @@ class _FeedPostState extends State<FeedPost> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(
-                  "$now ",
+                  "now ",
                   style: const TextStyle(color: Colors.white),
                 ),
                 Text(
-                  "  $postDate",
+                  "  postDate",
                   style: const TextStyle(color: Colors.white),
                 ),
                 const PlatformDisplay()

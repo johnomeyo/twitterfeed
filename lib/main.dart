@@ -1,5 +1,6 @@
 // import 'dart:ui_web';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:twitter_api/components/alpha.dart';
@@ -32,27 +33,38 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const FeedPage()));
-            },
-            child: const Icon(Icons.add),
-          ),
-          backgroundColor: Colors.black,
-          appBar: AppBar(
-            backgroundColor: Colors.black,
-            leading: GestureDetector(
-                onTap: () {}, child: const Icon(Icons.person_outline)),
-          ),
-          body: const SingleChildScrollView(
-            child: Column(
-              children: [
-                FeedPost(),
-              ],
+        home: Scaffold(
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const FeedPage()));
+              },
+              child: const Icon(Icons.add),
             ),
-          )),
-    );
+            backgroundColor: Colors.black,
+            appBar: AppBar(
+              backgroundColor: Colors.black,
+              leading: GestureDetector(
+                  onTap: () {}, child: const Icon(Icons.person_outline)),
+            ),
+            body: StreamBuilder(
+              stream:
+                  FirebaseFirestore.instance.collection("tweets").snapshots(),
+              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                if (snapshot.hasError) {
+                  return const Text("An error occured while fetching tweets");
+                } else if (snapshot.connectionState ==
+                    ConnectionState.waiting) {
+                  return const Text("loading...");
+                }
+                var docs = snapshot.data!.docs;
+                return ListView.builder(
+                  itemCount: docs.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return const FeedPost();
+                  },
+                );
+              },
+            )));
   }
 }
