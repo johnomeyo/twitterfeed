@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:twitter_api/components/beta.dart';
 
@@ -33,7 +31,7 @@ class _FeedPostState extends State<FeedPost> {
   @override
   Widget build(BuildContext context) {
     // var now = time();
-    var postDate = date();
+    // var postDate = date();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: SingleChildScrollView(
@@ -101,18 +99,18 @@ class _FeedPostState extends State<FeedPost> {
             const SizedBox(
               height: 20,
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(
                   "now ",
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.white),
                 ),
                 Text(
                   "  postDate",
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.white),
                 ),
-                const PlatformDisplay()
+                PlatformDisplay()
               ],
             ),
             const Divider(
@@ -132,7 +130,8 @@ class _FeedPostState extends State<FeedPost> {
                     TextSpan(
                         text: 'Retweets',
                         style: TextStyle(
-                            fontWeight: FontWeight.normal, color: Colors.white)),
+                            fontWeight: FontWeight.normal,
+                            color: Colors.white)),
                   ])),
                   RichText(
                       text: const TextSpan(children: [
@@ -143,7 +142,8 @@ class _FeedPostState extends State<FeedPost> {
                     TextSpan(
                         text: 'Quote tweets',
                         style: TextStyle(
-                            fontWeight: FontWeight.normal, color: Colors.white)),
+                            fontWeight: FontWeight.normal,
+                            color: Colors.white)),
                   ])),
                   RichText(
                       text: const TextSpan(children: [
@@ -154,7 +154,8 @@ class _FeedPostState extends State<FeedPost> {
                     TextSpan(
                         text: 'Likes',
                         style: TextStyle(
-                            fontWeight: FontWeight.normal, color: Colors.white)),
+                            fontWeight: FontWeight.normal,
+                            color: Colors.white)),
                   ])),
                 ],
               ),

@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:twitter_api/auth/sign_up.dart';
 import 'package:twitter_api/components/alpha.dart';
 import 'package:twitter_api/feed_page.dart';
 import 'package:twitter_api/firebase_options.dart';
@@ -17,7 +18,7 @@ void main() async {
     enabled: true,
     builder: (BuildContext context) {
       // ignore: deprecated_member_use
-      return const MaterialApp(useInheritedMediaQuery: true, home: MyApp());
+      return const MaterialApp(useInheritedMediaQuery: true, home: SignUpScreen());
     },
   ));
 }
