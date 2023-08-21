@@ -3,7 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:twitter_api/auth/sign_up.dart';
+// import 'package:twitter_api/auth/sign_up.dart';
 import 'package:twitter_api/components/alpha.dart';
 import 'package:twitter_api/feed_page.dart';
 import 'package:twitter_api/firebase_options.dart';
@@ -18,7 +18,7 @@ void main() async {
     enabled: true,
     builder: (BuildContext context) {
       // ignore: deprecated_member_use
-      return const MaterialApp(useInheritedMediaQuery: true, home: SignUpScreen());
+      return const MaterialApp(useInheritedMediaQuery: true, home: MyApp());
     },
   ));
 }
@@ -29,6 +29,8 @@ class MyApp extends StatefulWidget {
   @override
   State<MyApp> createState() => _MyAppState();
 }
+
+int tweet = 0;
 
 class _MyAppState extends State<MyApp> {
   @override
@@ -44,6 +46,8 @@ class _MyAppState extends State<MyApp> {
             ),
             backgroundColor: Colors.black,
             appBar: AppBar(
+              title: Text(tweet.toString(),
+                  style: const TextStyle(color: Colors.white)),
               backgroundColor: Colors.black,
               leading: GestureDetector(
                   onTap: () {}, child: const Icon(Icons.person_outline)),
@@ -59,6 +63,7 @@ class _MyAppState extends State<MyApp> {
                   return const Text("loading...");
                 }
                 var docs = snapshot.data!.docs;
+                print(docs.length);
                 return ListView.builder(
                   itemCount: docs.length,
                   itemBuilder: (BuildContext context, int index) {
