@@ -116,14 +116,14 @@ class _FeedPageState extends State<FeedPage> {
                   children: [
                     img != null
                         ? CircleAvatar(
+                            backgroundImage: MemoryImage(img!),
+                          )
+                        : CircleAvatar(
                             backgroundColor: Colors.white,
                             child: Icon(
                               Icons.person,
                               color: Colors.grey.shade700,
-                            ))
-                        : CircleAvatar(
-                            backgroundImage: MemoryImage(img!),
-                          ),
+                            )),
                     const SizedBox(
                       width: 20,
                     ),
