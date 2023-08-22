@@ -30,10 +30,13 @@ class AuthMethods {
         String photoUrl = await StorageMethods()
             .uploadFileToStorage("profilePics", file, false);
         //store user
-        firestore.collection("usersT").doc(cred.user!.uid).set(
-            {"name": name, "bio": bio, "email": email, "uid": cred.user!.uid,
-            "photoUrl": photoUrl
-            });
+        firestore.collection("usersT").doc(cred.user!.uid).set({
+          "name": name,
+          "bio": bio,
+          "email": email,
+          "uid": cred.user!.uid,
+          "photoUrl": photoUrl
+        });
         res = "success";
       }
     } catch (e) {

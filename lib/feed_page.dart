@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:twitter_api/resources/storage_methods.dart';
 import 'package:twitter_api/utils/utils.dart';
 
 class FeedPage extends StatefulWidget {
@@ -39,14 +40,16 @@ class _FeedPageState extends State<FeedPage> {
 
   void postTweet() async {
     try {
-      await FirebaseFirestore.instance.collection('tweets').add({
-        "tweet": tweet.text,
-        "time": DateTime.now(),
-      });
-      debugPrint("Tweet posted succesfully ");
+      String photoUrl =
+          await StorageMethods().uploadFileToStorage("tweet", img!, false);
+      await FirebaseFirestore.instance.collection('tweets').add(
+          {"tweet": tweet.text, "time": DateTime.now(), "photoUrl": photoUrl});
+      // ignore: use_build_context_synchronously
+      showDialog(context: context, builder: (context) => const AlertDialog(content: Text("tweet posted successfully"),));
     } catch (e) {
       debugPrint("The error is $e");
     }
+
   }
 
   @override
