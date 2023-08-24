@@ -30,23 +30,24 @@ class _RecipeScreenState extends State<RecipeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: const Text(
-            "Food menu",
-            style: TextStyle(color: Colors.black),
-          ),
-          centerTitle: true,
-          elevation: 0,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: const Text(
+          "Food menu",
+          style: TextStyle(color: Colors.black),
         ),
-        body: _isLoading
-            ? CircularProgressIndicator()
-            : ListView.builder(
-              itemCount: recipes?.length,
-                itemBuilder: (context, index) => RecipeCard(
-                    title: recipes![index].name,
-                    thumbnailUrl: recipes![index].images,
-                    rating: recipes![index].rating.toString(),
-                    cookTime: recipes![index].totalTime)));
+        centerTitle: true,
+        elevation: 0,
+      ),
+    );
+    // body: _isLoading
+    //     ? const CircularProgressIndicator()
+    //     : ListView.builder(
+    //       itemCount: recipes?.length,
+    //         itemBuilder: (context, index) => RecipeCard(
+    //             title: recipes![index].name,
+    //             thumbnailUrl: recipes![index].images,
+    //             rating: recipes![index].rating.toString(),
+    //             cookTime: recipes![index].totalTime)));
   }
 }
