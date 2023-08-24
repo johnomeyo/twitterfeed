@@ -38,7 +38,39 @@ class _HomePageState extends State<HomePage> {
         replacement: const CircularProgressIndicator(),
         child: ListView.builder(
             itemCount: posts?.length,
-            itemBuilder: (context, index) => const Text("data")),
+            itemBuilder: (context, index) => Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        height: 40,
+                        width: 40,
+                        decoration: BoxDecoration(
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.circular(20)),
+                      ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            posts![index].title,
+                            maxLines: 2,
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            posts![index].body ?? "",
+                            maxLines: 2,
+                            style: const TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.normal),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                )),
       ),
     );
   }

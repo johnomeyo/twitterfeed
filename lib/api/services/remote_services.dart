@@ -2,6 +2,7 @@ import 'package:twitter_api/api/models/post.dart';
 import 'package:http/http.dart' as http;
 
 class RemoteService {
+  // ignore: body_might_complete_normally_nullable
   Future<List<Post>?> getPosts() async {
     var client = http.Client();
     var uri = Uri.parse("https://jsonplaceholder.typicode.com/posts");
