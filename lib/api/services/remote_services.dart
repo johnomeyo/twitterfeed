@@ -13,16 +13,4 @@ class RemoteService {
       return postFromJson(json);
     }
   }
-
-  Future<List<Recipe>?> getRecipes() async {
-    var client = http.Client();
-    var uri =
-        Uri.parse("https://api.spoonacular.com/recipes/findByIngredients");
-    var response = await client.get(uri);
-    if (response.statusCode == 200) {
-      var json = response.body;
-      return recipeFromJson(json);
-    }
-    return null;
-  }
 }
