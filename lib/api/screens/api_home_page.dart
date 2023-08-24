@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:twitter_api/api/models/post.dart';
+import 'package:twitter_api/api/screens/recipe_screen.dart';
 import 'package:twitter_api/api/services/remote_services.dart';
 
 class HomePage extends StatefulWidget {
@@ -32,6 +33,12 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Api Homepage"),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const RecipeScreen()));
+            },
+            icon: const Icon(Icons.navigate_next_rounded)),
       ),
       body: Visibility(
         visible: isLoaded,
