@@ -1,19 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:twitter_api/api/models/recipe_model.dart';
 import 'package:twitter_api/api/recipe_card.dart';
+import 'package:twitter_api/api/services/remote_services.dart';
 
-class RecipeScreen extends StatelessWidget {
+class RecipeScreen extends StatefulWidget {
   const RecipeScreen({super.key});
+
+  @override
+  State<RecipeScreen> createState() => _RecipeScreenState();
+}
+
+class _RecipeScreenState extends State<RecipeScreen> {
+  List<Recipe>? recipes;
+  bool _isLoading = true;
+  @override
+  void initState() {
+    super.initState();
+    getRecipes();
+  }
+
+  Future<void> getRecipes() async {
+    var recipes = await RecipeApi().getRecipe();
+    setState(() {
+      _isLoading = false;
+    });
+    print("the recipes are $recipes");
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor:  Colors.white,
-        title: const Text("Food menu",style: TextStyle(color: Colors.black),) ,
-        centerTitle: true,
-        elevation: 0,
-      ),
-      body: RecipeCard(title: "title", cookTime: "cookTime", rating: "4.5", thumbnailUrl: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80"),
-    );
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: const Text(
+            "Food menu",
+            style: TextStyle(color: Colors.black),
+          ),
+          centerTitle: true,
+          elevation: 0,
+        ),
+        body: _isLoading
+            ? CircularProgressIndicator()
+            : ListView.builder(
+              itemCount: recipes?.length,
+                itemBuilder: (context, index) => RecipeCard(
+                    title: recipes![index].name,
+                    thumbnailUrl: recipes![index].images,
+                    rating: recipes![index].rating.toString(),
+                    cookTime: recipes![index].totalTime)));
   }
 }

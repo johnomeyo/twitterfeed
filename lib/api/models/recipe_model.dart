@@ -20,4 +20,9 @@ class Recipe {
   static List<Recipe> recipesFromSnapshot(List snapshot) {
     return snapshot.map((data) => Recipe.fromJson(data)).toList();
   }
+
+  @override
+  String toString() {
+    return "Recipe{name: $name, image: $images,rating: $rating, totalTime: $totalTime}";
+  }
 }
