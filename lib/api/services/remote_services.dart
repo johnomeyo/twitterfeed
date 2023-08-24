@@ -20,10 +20,12 @@ class RecipeApi {
   Future<List<Recipe>?> getRecipe() async {
     var client = http.Client();
     var uri = Uri.parse("https://yummly2.p.rapidapi.com/feeds/list");
+    // ignore: unused_local_variable
     final response = await client.get(uri);
-    if (response.statusCode == 200) {
-      var json = response.body;
-      // return Recipe.fromJson(json);
-    }
+    // if (response.statusCode == 200) {
+    //   var json = response.body;
+    //   // return Recipe.fromJson(json);
+    // }
+    // return response.body;
   }
 }

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:twitter_api/api/models/recipe_model.dart';
-import 'package:twitter_api/api/recipe_card.dart';
-import 'package:twitter_api/api/services/remote_services.dart';
 
 class RecipeScreen extends StatefulWidget {
   const RecipeScreen({super.key});
@@ -12,7 +10,7 @@ class RecipeScreen extends StatefulWidget {
 
 class _RecipeScreenState extends State<RecipeScreen> {
   List<Recipe>? recipes;
-  bool _isLoading = true;
+  // bool _isLoading = true;
   @override
   void initState() {
     super.initState();
@@ -20,11 +18,11 @@ class _RecipeScreenState extends State<RecipeScreen> {
   }
 
   Future<void> getRecipes() async {
-    var recipes = await RecipeApi().getRecipe();
+    // var recipes = await RecipeApi().getRecipe();
     setState(() {
-      _isLoading = false;
+      // _isLoading = false;
     });
-    print("the recipes are $recipes");
+    // print("the recipes are $recipes");
   }
 
   @override
